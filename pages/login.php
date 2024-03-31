@@ -24,7 +24,7 @@
             <input type="password" name="password" id="password_user" required placeholder="Password">
             <div class="error">
                 <p id="correctionPas">Incorrect password</p>
-                <p id="emptyPas">Enter password</p>
+                <p id="emptyPas">Enter password please</p>
             </div>
             <button type="submit" name="loguser">Login</button>
         </form>
