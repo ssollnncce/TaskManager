@@ -15,7 +15,9 @@
             <div class="logo-image"></div>
             <h4>TaskMinder.</h4>
         </div>
-        <form method="POST" id="loginform">
+
+        <!-- form for login -->
+        <!-- <form method="POST" id="loginform">
             <input type="text" name="login" id="login_user" required placeholder="Login">
             <div class="error">
                 <p id="correctionLog">Incorrect login</p>
@@ -25,9 +27,32 @@
             <div class="error">
                 <p id="correctionPas">Incorrect password</p>
                 <p id="emptyPas">Enter password please</p>
-            </div>
+            </div>  
             <button type="submit" name="loguser">Login</button>
+        </form> -->
+
+        <!-- form for signup -->
+        <form method="POST" id="signupform" class="signup">
+            <input type="text" name="name" id="user_name" placeholder="Name">
+            <div class="error_sig">
+                <p>Name can't be empty</p>
+            </div>
+            <input type="text" name="surname" id="user_surname" placeholder="Surname">
+            <div class="error_sig">
+                <p>Surname can't be empty</p>
+            </div>
+            <input type="text" name="login" id="user_login_sig" placeholder="Login">
+            <div class="error_sig">
+                <p>Login can't be empty</p>
+            </div>
+            <input type="text" name="password" id="user_password_sig" placeholder="Password">
+            <div class="error_pas_sig">
+                <p class="error_sig">Login can't be empty</p>
+                <p id="count_symb">Password must be longer than 8 characters</p>
+            </div>
+            <button type="submit">SIGN UP</button>
         </form>
+
     </div>
     <div class="radio-container">
         <input type="radio" name="forms" id="radlog" checked>
@@ -35,6 +60,10 @@
         <input type="radio" name="forms" id="radsig">
         <label for="radsig">SIGN UP</label>
     </div>
+
+
+
+    <script src="../script/code.js"></script>
 </body>
 </html>
 
