@@ -37,7 +37,7 @@ function addUser($name, $surname, $login, $password){
 function getExist ($tableName, $column_name, $field){
     global $conn;
 
-    $sql = "SELECT * FROM '$tableName' WHERE '$column_name' = '$field'";
+    $sql = "SELECT * FROM $tableName WHERE $column_name = '$field'";
     $result = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($result) > 0){

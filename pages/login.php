@@ -65,7 +65,7 @@
 </html>
 
 <?php
-session_start();
+session_start();    
 include_once("../php/db.php");
 
 if (isset($_POST['add_user'])){
@@ -87,27 +87,45 @@ if (isset($_POST['add_user'])){
             if (getExist('users', 'login', $_POST['login_sig'])){
                 ?>
                 <script>
-                    var borders = document.querySelectorAll(".fielsSig");
-                    var exist = document.getElementById('AlertSignLog');
+                    var exist =document.getElementById("AlertSignLog");
+                    var borders =document.querySelectorAll(".fielsSig");
 
-                    exist.style.display = "flex";
-                    borders.forEach(function(border) {
+                    borders.forEach(function(border){
                         border.style.border = "1px solid var(--error-500)";
                     });
-
-                    console.log("login is exist");
-
+                    exist.style.display = "flex";
+                    console.log("exist")
                 </script>
                 <?php
             }
             else{
-                $name = $_POST['name_sig'];
-                $surname = $_POST['surname_sig'];
-                $login = $_POST['login_sig'];
                 $password = $_POST['password_sig'];
-                addUser($name, $surname ,$login, $password);
-                header("location: login.php");
+                if (strlen($password) < 8){
+                    ?>
+                    <script>
+                        var borders = document.querySelectorAll(".fielsSig");
+                        var length = document.getElementById("AlertSignPas"); 
+
+                        length.style.display = "flex";
+                        borders.forEach(function(border){
+                            border.style.border = "1px solid var(--error-500)";
+                        });
+
+                        console.log("length");
+                    </script>
+                    <?php
+                }
+                else{
+                    $name = $_POST['name_sig'];
+                    $surname = $_POST['surname_sig'];
+                    $login = $_POST['login_sig'];
+                    $password = $_POST['password_sig'];
+                    addUser($name, $surname ,$login, $password);
+                    header("location: login.php");
+                }
+                
             }
+            
             
         }
 }
@@ -126,9 +144,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         </script> <?php
     }else{
         if (loginUser($login, $password)) {
-            // Если пользователь успешно вошел, сохраняем логин в сессии
             $_SESSION['login'] = $login;
-            header("Location: main.php"); // Перенаправляем на защищенную страницу
+            header("Location: main.php");
             exit;
         } else {
            ?><script>
