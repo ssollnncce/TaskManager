@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="../style/colors.css">
     <link rel="stylesheet" href="../style/login-style.css">
     <link rel="stylesheet" href="../style/fonts.css">
@@ -32,25 +32,21 @@
         </form> -->
 
         <!-- form for signup -->
-        <form method="POST" id="signupform" class="signup">
-            <input type="text" name="name" id="user_name" placeholder="Name">
-            <div class="error_sig">
-                <p>Name can't be empty</p>
+        <form method="POST" id="signupform" class="signup" autocomplete="off">
+            <div class="alert alert-danger notif" role="alert" id="AlertSign">
+                All fields must be completed!
             </div>
-            <input type="text" name="surname" id="user_surname" placeholder="Surname">
-            <div class="error_sig">
-                <p>Surname can't be empty</p>
+            <div class="alert alert-danger notif" role="alert" id="AlertSignLog">
+                This login is exists!
             </div>
-            <input type="text" name="login" id="user_login_sig" placeholder="Login">
-            <div class="error_sig">
-                <p>Login can't be empty</p>
+            <div class="alert alert-danger notif" role="alert" id="AlertSignPas">
+                Paccword must be longer 8 symbols!
             </div>
-            <input type="text" name="password" id="user_password_sig" placeholder="Password">
-            <div class="error_pas_sig">
-                <p class="error_sig">Login can't be empty</p>
-                <p id="count_symb">Password must be longer than 8 characters</p>
-            </div>
-            <button type="submit">SIGN UP</button>
+            <input type="text" name="name_sig" id="user_name" placeholder="Name" class="fielsSig">
+            <input type="text" name="surname_sig" id="user_surname" placeholder="Surname" class="fielsSig">
+            <input type="text" name="login_sig" id="user_login_sig" placeholder="Login" class="fielsSig">
+            <input type="text" name="password_sig" id="user_password_sig" placeholder="Password" class="fielsSig">
+            <button type="submit" name="add_user">SIGN UP</button>
         </form>
 
     </div>
@@ -63,13 +59,58 @@
 
 
 
-    <script src="../script/code.js"></script>
+    <script src="../code/script.js"></script>
+    <script src="../code/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
 <?php
 session_start();
 include_once("../php/db.php");
+
+if (isset($_POST['add_user'])){
+        if((empty($_POST['name_sig'])) || (empty($_POST['surname_sig'])) || (empty($_POST['login_sig'])) || (empty($_POST['password_sig']))){
+            ?> <script>
+                var borders = document.querySelectorAll(".fielsSig");
+                var empty = document.getElementById("AlertSign")
+
+                borders.forEach(function(border) {
+                    border.style.border = "1px solid var(--error-500)";
+                });
+                empty.style.display = "flex";
+
+                console.log("empty fields");
+
+            </script><?php
+        }
+        else{
+            if (getExist('users', 'login', $_POST['login_sig'])){
+                ?>
+                <script>
+                    var borders = document.querySelectorAll(".fielsSig");
+                    var exist = document.getElementById('AlertSignLog');
+
+                    exist.style.display = "flex";
+                    borders.forEach(function(border) {
+                        border.style.border = "1px solid var(--error-500)";
+                    });
+
+                    console.log("login is exist");
+
+                </script>
+                <?php
+            }
+            else{
+                $name = $_POST['name_sig'];
+                $surname = $_POST['surname_sig'];
+                $login = $_POST['login_sig'];
+                $password = $_POST['password_sig'];
+                addUser($name, $surname ,$login, $password);
+                header("location: login.php");
+            }
+            
+        }
+}
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $login = $_POST['login'];
