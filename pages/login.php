@@ -17,7 +17,7 @@
         </div>
 
         <!-- form for login -->
-        <!-- <form method="POST" id="loginform">
+        <form method="POST" id="loginform">
             <input type="text" name="login" id="login_user" required placeholder="Login">
             <div class="error">
                 <p id="correctionLog">Incorrect login</p>
@@ -29,7 +29,7 @@
                 <p id="emptyPas">Enter password please</p>
             </div>  
             <button type="submit" name="loguser">Login</button>
-        </form> -->
+        </form>
 
         <!-- form for signup -->
         <form method="POST" id="signupform" class="signup" autocomplete="off">
@@ -52,9 +52,9 @@
     </div>
     <div class="radio-container">
         <input type="radio" name="forms" id="radlog" checked>
-        <label for="radlog">LOG IN</label>
+        <label for="radlog" >LOG IN</label>
         <input type="radio" name="forms" id="radsig">
-        <label for="radsig">SIGN UP</label>
+        <label for="radsig" >SIGN UP</label>
     </div>
 
 
