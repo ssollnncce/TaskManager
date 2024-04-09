@@ -81,7 +81,7 @@ body{
 .error_sig p{
     margin: 0;
 }
-#loginform{
+/* #loginform{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -103,7 +103,7 @@ body{
 } */
 /* #loginform input:focus{
     box-shadow: 0px 0px 10px 2px var(--primary-700);
-}
+} */
 
 ::placeholder{
     color: var(--neutral-400);
